@@ -1,0 +1,57 @@
+<% include ../views/partials/header %>
+
+<div class="row">
+    <div class="col-md-6">
+            <form method = "post" action="/todo/add">
+                <div class="form-group"> 
+                    <label>Todo Name</label>
+                    <input class="form-control" type="text" name="text" placeholder="Add Todo">
+                </div>
+
+                <div class="form-group"> 
+                        <label>Todo Duration</label>
+                        <input class="form-control" type="number" name="months" placeholder="Months">
+                </div>
+
+                <div class="form-group"   >
+                    <label>Todo Body</label>
+                    <textarea class="form-control" type="text" name="body" placeholder="Add Description"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+            </form>
+    </div>
+       
+    <div class="col-md-6">
+            <table class="table table-striped">
+                <thead>
+                    <th>Task</th>
+                    <th>Description</th>
+                    <th>Duration</th>
+                    <th></th>
+                    <th></th>
+                </thead>
+                <tbody>
+                    <% todos.forEach(function(todo){ %>
+                        <tr> 
+                            <th> <%= todo.text %></th>
+                            <td> <%= todo.body %></td>
+                        <% if (todo.months == 1) { %>
+                            <td> <%= todo.months %> Month</td>
+                        <% }else{ %>
+                            <td> <%= todo.months %> Months</td>
+                        <% } %>
+                            <td><a  href="/todo/edit/<%= todo._id %>" class="btn btn-success pull-right" id="btns">Edit</a></td>
+                            <td> <a data-id="<%= todo._id %>" href="#" class="delete-todo btn btn-danger pull-right">Delete</a></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+    </div>
+
+</div>
+
+
+<% include ../views/partials/footer %>
+
+ 
